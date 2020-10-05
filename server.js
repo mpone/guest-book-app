@@ -1,78 +1,29 @@
-const express = require('express')
+const bodyParser = require('body-parser');
+const express = require('express');
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
-const messages = [
-  {
-    "messageId": "1",
-    "name": "Bill",
-    "text": "That's my first message."
-  },
-  {
-    "messageId": "2",
-    "name": "John",
-    "text": "That's my first message after Bill."
-  },
-  {
-    "messageId": "3",
-    "name": "John",
-    "text": "That's my first message after Bill."
-  },
-  {
-    "messageId": "4",
-    "name": "John",
-    "text": "That's my first message after Bill."
-  },
-  {
-    "messageId": "5",
-    "name": "John",
-    "text": "That's my first message after Bill."
-  },
-  {
-    "messageId": "6",
-    "name": "John",
-    "text": "That's my first message after Bill."
-  },
-  {
-    "messageId": "7",
-    "name": "John",
-    "text": "That's my first message after Bill."
-  },
-  {
-    "messageId": "8",
-    "name": "John",
-    "text": "That's my first message after Bill."
-  },  {
-    "messageId": "9",
-    "name": "John",
-    "text": "That's my first message after Bill."
-  },
-  {
-    "messageId": "10",
-    "name": "John",
-    "text": "That's my first message after Bill."
-  },
-  {
-    "messageId": "11",
-    "name": "John",
-    "text": "That's my first message after Bill."
-  },
-  {
-    "messageId": "12",
-    "name": "John",
-    "text": "That's my first message after Bill."
-  },
-];
+const { getMessages, addMessage } = require('./server/messages');
+
+app.use((req, res, next) => {
+  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.set('Access-Control-Allow-Headers', 'content-type');
+  next();
+});
 
 app.get('/api/messages', (req, res) => {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.json(messages)
+  res.json(getMessages())
+});
+
+app.post('/api/messages', bodyParser.json(), (req, res) => {
+  addMessage(req.body.text, req.body.name);
+  const messages = getMessages();
+
+  res.json(messages.length - 1);
 });
 
 app.use(express.static('build'));
 
 app.listen(port, () => {
-  console.log(
-    `Example app listening at http://localhost:${port}`
-  );
-})
+  console.log(`Example app listening at http://localhost:${port}`);
+});

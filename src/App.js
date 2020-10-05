@@ -5,27 +5,22 @@ import { Header } from './components/Header';
 import { MessageForm } from './components/MessageForm';
 import { MessagesList} from './components/MessagesList';
 
+import { getMessages, addMessage } from './api/messagesApi';
+
 function App() {
   const [messagesList, setMessagesList] = useState([]);
 
-  useEffect(
-    () => {
-      fetch('http://localhost:5000/api/messages')
-      .then(response => response.json())
-      .then(data => setMessagesList(data))
-    }, [],
-  );
+  const getMessagesFromServer = async () => {
+    const data = await getMessages();
 
-  const addMessage = (name, text) => {
-    setMessagesList([
-      ...messagesList,
-      {
-        messageId: String(messagesList.length + 1),
-        name,
-        text,
-        date: new Date(),
-      },
-    ]);
+    return setMessagesList(data);
+  }
+
+  useEffect(() => getMessagesFromServer(), []);
+
+  const addMessageToServer = async (text, name) => {
+    await addMessage(text, name);
+    getMessagesFromServer();
   }
 
   return (
@@ -39,7 +34,7 @@ function App() {
           />
 
           <MessageForm
-            addMessage={addMessage}
+            addMessageToServer={addMessageToServer}
           />
         </main>
       </section>
