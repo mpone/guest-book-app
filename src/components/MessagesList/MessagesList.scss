@@ -1,11 +1,13 @@
 @import '../../styles/styles.scss';
 
 .messages {
-  padding: $sGap;
+  position: relative;
+  padding-left: $sGap;
+  padding-right: $sGap;
+  padding-top: $sGap;
   margin: $mGap;
   height: 60vh;
   overflow-y: scroll;
-  position: relative;
   background: $messagesBgColor;
   border-radius: $smallBrdrRadius;
   box-shadow: $innerContentShadow;
@@ -30,10 +32,6 @@
     margin-bottom: $sGap;
     background: $messageBgColor;
     border-radius: $mainBrdrRadius $mainBrdrRadius $mainBrdrRadius $smallBrdrRadius;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   &__name,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import './MessageForm.scss';
+import './MessageForm.scss';
 
 export const MessageForm = ({ addMessage }) => {
   const [name, setName] = useState('');
