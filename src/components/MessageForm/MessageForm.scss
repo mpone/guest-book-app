@@ -1,0 +1,81 @@
+@import '../../styles/styles.scss';
+
+.message-form {
+  padding-top: $sGap;
+}
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  padding-left: $mGap;
+  padding-right: $mGap;
+  padding-bottom: $mGap;
+
+  &__inputs {
+    display: inherit;
+    flex-direction: column;
+    flex: 1 1 auto;
+    margin-right: $mGap;
+  }
+
+  &__name,
+  &__text,
+  &__button {
+    box-shadow: $innerContentShadow;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__name,
+  &__text {
+    padding-top: $xsGap;
+    padding-bottom: $xsGap;
+    padding-left: $sGap;
+    @extend %fontRoboto;
+    color: $inputsFontColor;
+    background: $messagesBgColor;
+    border: none;
+  }
+
+  &__name {
+    margin-bottom: $sGap;
+    border-radius: $smallBrdrRadius;
+  }
+
+  &__text {
+    resize: none;
+    border-radius: $smallBrdrRadius $smallBrdrRadius $smallBrdrRadius $mainBrdrRadius;
+
+    @extend %defauilScrollY;
+  }
+
+  &__button {
+    
+    padding: $mGap;
+    @extend %fontRoboto;
+    font-weight: 500;
+    color: $lightColor;
+    background: $submitBtnColor;
+    border: none;
+    border-radius: $mainBrdrRadius $smallBrdrRadius $mainBrdrRadius $mainBrdrRadius;
+    cursor: pointer;
+    transition: background $animOnHover,
+      transform $animOnHover;
+
+    &:hover {
+      background: $submitHoverColor;
+    }
+
+    &:active {
+      transform: translate(1px, 1px);
+    }
+  }
+
+  &__error {
+    position: absolute;
+    color: $submitBtnColor;
+    transform: translate($sGap, -($mGap + $sGap));
+  }
+}

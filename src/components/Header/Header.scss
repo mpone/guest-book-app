@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+.header {
+  display: flex;
+  align-items: center;
+  padding-top: $mGap;
+  padding-bottom: $mGap;
+  background: $messageBgColor;
+  border-radius: $mainBrdrRadius $mainBrdrRadius 0 0;
+  box-shadow: $innerContentShadow;
+
+  &__title {
+    margin-left: $mGap + $sGap;
+    font-size: 20px;
+    font-weight: 500;
+    color: $bgColor;
+  }
+}
