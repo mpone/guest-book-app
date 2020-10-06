@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './MessagesList.scss';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import { LoadingSpinner } from '../LoadingSpinner';
 
@@ -35,14 +36,7 @@ export const MessagesList = ({ list }) => {
 
               {message.date && (
                 <span className="messages__date">
-                  {message.date.toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: '2-digit',
-                    weekday: 'short',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    hour12: true,
-                  })}
+                  { moment(message.date).format('MMM Do, h:mm A') }
                 </span>
               )}
             </li>
@@ -58,7 +52,7 @@ export const MessagesList = ({ list }) => {
 MessagesList.propTypes = {
   list: PropTypes.arrayOf(
     PropTypes.shape({
-      messageId: PropTypes.string,
+      messageId: PropTypes.number,
       text: PropTypes.string,
       name: PropTypes.string,
       date: PropTypes.date,

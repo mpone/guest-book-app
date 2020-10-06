@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './MessageForm.scss';
 
-export const MessageForm = ({ addMessage }) => {
+export const MessageForm = ({
+  addMessageToServer,
+}) => {
   const [name, setName] = useState('');
   const [text, setText] = useState('');
   const [errors, setErrors] = useState({
@@ -30,7 +32,7 @@ export const MessageForm = ({ addMessage }) => {
       setErrors({ noText: true });
       return;
     }
-    addMessage(name, text);
+    addMessageToServer(text, name);
     setName('');
     setText('');
   }
@@ -93,5 +95,5 @@ export const MessageForm = ({ addMessage }) => {
 
 
 MessageForm.propTypes = {
-  addMessage: PropTypes.func.isRequired,
+  addMessageToServer: PropTypes.func.isRequired,
 };
